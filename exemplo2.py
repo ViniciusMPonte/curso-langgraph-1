@@ -12,7 +12,7 @@ load_dotenv()
 API_KEY: str = os.getenv('API_KEY')
 
 llm_model: ChatGoogleGenerativeAI = ChatGoogleGenerativeAI(
-    model="gemini-flash-latest",
+    model="gemini-2.5-flash-lite",
     google_api_key=API_KEY
 )
 
