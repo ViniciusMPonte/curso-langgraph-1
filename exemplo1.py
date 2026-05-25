@@ -1,6 +1,6 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import HumanMessage, AIMessage
-from langgraph import graph
+from langchain_core.runnables.graph import MermaidDrawMethod
 from langgraph.graph import StateGraph
 from langgraph.graph.state import CompiledStateGraph
 from pydantic import BaseModel
@@ -33,3 +33,7 @@ export_graph: CompiledStateGraph = graph.compile()
 if __name__ == "__main__":
     result = export_graph.invoke(StateSchema(input='Quem descobriu o Brasil?', output=''))
     print(result)
+    print(export_graph.get_graph().draw_mermaid())
+    png_bytes: bytes = export_graph.get_graph().draw_mermaid_png(draw_method=MermaidDrawMethod.API)
+    with open('exemplo1.png', 'wb') as f:
+        f.write(png_bytes)
